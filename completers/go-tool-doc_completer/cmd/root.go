@@ -1,7 +1,10 @@
 package cmd
 
 import (
+	"strings"
+
 	"github.com/rsteube/carapace"
+	"github.com/rsteube/carapace-bin/pkg/actions/tools/git"
 	"github.com/rsteube/carapace-bin/pkg/actions/tools/golang"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -35,8 +38,29 @@ func init() {
 	})
 
 	carapace.Gen(rootCmd).PositionalCompletion(
-		golang.ActionPackages(),
-		carapace.ActionMultiParts(".", func(c carapace.Context) carapace.Action {
+		carapace.ActionMultiPartsN("@", 2, func(c carapace.Context) carapace.Action {
+			switch len(c.Parts) {
+			case 0:
+				return golang.ActionPackages()
+			default:
+				// TODO complete versions for other packages
+				var url string
+				switch {
+				case strings.HasPrefix(c.Parts[0], "github.com/"):
+					if splitted := strings.Split(c.Parts[0], "/"); len(splitted) > 2 {
+						url = "https://" + strings.Join(splitted[:3], "/")
+					}
+				case strings.HasPrefix(c.Parts[0], "golang.org/x/tools/"):
+					url = "https://github.com/golang/tools"
+				}
+
+				if url != "" {
+					return git.ActionLsRemoteRefs(git.LsRemoteRefOption{Url: url, Tags: true})
+				}
+				return carapace.ActionValues()
+			}
+		}),
+		carapace.ActionMultiPartsN(".", 2, func(c carapace.Context) carapace.Action {
 			switch len(c.Parts) {
 			case 0:
 				return golang.ActionSymbols(golang.SymbolOpts{
@@ -44,15 +68,12 @@ func init() {
 					Unexported: rootCmd.Flag("u").Changed,
 				}).NoSpace()
 
-			case 1:
+			default:
 				return golang.ActionMethodOrFields(golang.MethodOrFieldOpts{
 					Package:    c.Args[0],
 					Symbol:     c.Parts[0],
 					Unexported: rootCmd.Flag("u").Changed,
 				})
-
-			default:
-				return carapace.ActionValues()
 			}
 		}),
 	)
