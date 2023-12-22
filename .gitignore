@@ -1,10 +1,10 @@
 carapace-bin.mp4
 cmd/carapace/carapace
 cmd/carapace/carapace.exe
+cmd/carapace/cmd/completers/completers_generated.go
+cmd/carapace/cmd/completers/completers_release_generated.go
 cmd/carapace/cmd/completers/description.go
-cmd/carapace/cmd/completers.go
 cmd/carapace/cmd/completers/name.go
-cmd/carapace/cmd/completers_release.go
 cmd/carapace/cmd/shim/*.exe
 cmd/carapace-fmt/carapace-fmt
 cmd/carapace-generate/carapace-generate

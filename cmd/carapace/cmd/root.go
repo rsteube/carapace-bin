@@ -349,7 +349,7 @@ func invokeCompleter(completer string) string {
 	}()
 
 	os.Args[1] = "_carapace"
-	executeCompleter(completer)
+	completers.ExecuteCompleter(completer)
 
 	w.Close()
 	out := <-outC

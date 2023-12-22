@@ -52,12 +52,12 @@ func main() {
 		)
 	}
 
-	content := fmt.Sprintf(`package cmd
+	content := fmt.Sprintf(`package completers
 
 import (
 %v)
 
-func executeCompleter(completer string) {
+func ExecuteCompleter(completer string) {
 	switch completer {
 %v	}
 }
@@ -73,10 +73,10 @@ func executeCompleter(completer string) {
 	}
 
 	os.Mkdir(root+"/cmd/carapace/cmd/completers", 0755)
-	os.WriteFile(root+"/cmd/carapace/cmd/completers.go", []byte("//go:build !release\n\n"+content), 0644)
+	os.WriteFile(root+"/cmd/carapace/cmd/completers/completers_generated.go", []byte("//go:build !release\n\n"+content), 0644)
 	os.WriteFile(root+"/cmd/carapace/cmd/completers/name.go", []byte(fmt.Sprintf("package completers\n\nfunc init() {\n	names = []string{\n%v\n\t}\n}\n", strings.Join(formattedNames, "\n"))), 0644)
 	os.WriteFile(root+"/cmd/carapace/cmd/completers/description.go", []byte(fmt.Sprintf("package completers\n\nfunc init() {\n	descriptions = map[string]string{\n%v\n\t}\n}\n", strings.Join(formattedDescriptions, "\n"))), 0644)
-	os.WriteFile(root+"/cmd/carapace/cmd/completers_release.go", []byte("//go:build release\n\n"+strings.Replace(content, "/completers/", "/completers_release/", -1)), 0644)
+	os.WriteFile(root+"/cmd/carapace/cmd/completers/completers_release_generated.go", []byte("//go:build release\n\n"+strings.Replace(content, "/completers/", "/completers_release/", -1)), 0644)
 	os.RemoveAll(root + "/completers_release")
 	execabs.Command("cp", "-r", root+"/completers", root+"/completers_release").Run()
 
