@@ -13,7 +13,7 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:   "--list",
-	Short: "",
+	Short: "list completers",
 	Run: func(cmd *cobra.Command, args []string) {
 		switch cmd.Flag("format").Value.String() {
 		case "json":

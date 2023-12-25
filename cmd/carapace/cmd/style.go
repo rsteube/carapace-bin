@@ -11,7 +11,7 @@ import (
 
 var styleCmd = &cobra.Command{
 	Use:   "--style [config]",
-	Short: "",
+	Short: "set style",
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := setStyle(args[0]); err != nil {

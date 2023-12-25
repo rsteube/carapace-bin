@@ -15,7 +15,7 @@ import (
 
 var macroCmd = &cobra.Command{
 	Use:   "--macro [macro] ...",
-	Short: "",
+	Short: "list or execute macros",
 	Args:  cobra.ArbitraryArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		switch len(args) {

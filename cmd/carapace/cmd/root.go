@@ -238,13 +238,13 @@ func Execute(version string) error {
 }
 
 func init() {
-	rootCmd.Flags().Bool("codegen", false, "generate code for spec file")
+	rootCmd.Flags().Bool("codegen", false, codegenCmd.Short)
 	rootCmd.Flags().BoolP("help", "h", false, "help for carapace")
-	rootCmd.Flags().Bool("list", false, "list completers")
-	rootCmd.Flags().Bool("macro", false, "list or execute macros")
-	rootCmd.Flags().Bool("run", false, "run spec")
-	rootCmd.Flags().Bool("schema", false, "json schema for spec files")
-	rootCmd.Flags().Bool("style", false, "set style")
+	rootCmd.Flags().Bool("list", false, listCmd.Short)
+	rootCmd.Flags().Bool("macro", false, macroCmd.Short)
+	rootCmd.Flags().Bool("run", false, runCmd.Short)
+	rootCmd.Flags().Bool("schema", false, schemaCmd.Short)
+	rootCmd.Flags().Bool("style", false, styleCmd.Short)
 	rootCmd.Flags().BoolP("version", "v", false, "version for carapace")
 
 	rootCmd.MarkFlagsMutuallyExclusive(
