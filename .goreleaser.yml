@@ -66,6 +66,11 @@ aurs:
       - carapace
     conflicts:
       - carapace
+    package: |-
+       install -Dm755 "./carapace" "${pkgdir}/usr/bin/carapace"
+       mkdir -p "${pkgdir}/etc/xdg/carapace/specs"
+       mkdir -p "${pkgdir}/etc/xdg/carapace/variables"
+
 
 nfpms:
   -
