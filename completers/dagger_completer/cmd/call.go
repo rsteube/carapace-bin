@@ -15,6 +15,7 @@ var callCmd = &cobra.Command{
 
 func init() {
 	carapace.Gen(callCmd).Standalone()
+	callCmd.Flags().SetInterspersed(false)
 
 	callCmd.PersistentFlags().Bool("focus", false, "Only show output for focused commands")
 	callCmd.PersistentFlags().Bool("json", false, "Present result as JSON")
