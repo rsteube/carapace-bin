@@ -1,0 +1,46 @@
+package action
+
+import "github.com/rsteube/carapace"
+
+func ActionTypes() carapace.Action {
+	return carapace.ActionValues(
+		"amt",
+		"bareudp",
+		"bond",
+		"bond_slave",
+		"bridge",
+		"bridge_slave",
+		"dummy",
+		"erspan",
+		"geneve",
+		"gre",
+		"gretap",
+		"ifb",
+		"ip6erspan",
+		"ip6gre",
+		"ip6gretap",
+		"ip6tnl",
+		"ipip",
+		"ipoib",
+		"ipvlan",
+		"ipvtap",
+		"macsec",
+		"macvlan",
+		"macvtap",
+		"netdevsim",
+		"nlmon",
+		"rmnet",
+		"sit",
+		"team",
+		"team_slave",
+		"vcan",
+		"veth",
+		"vlan",
+		"vrf",
+		"vti",
+		"vxcan",
+		"vxlan",
+		"wwan",
+		"xfrm",
+	)
+}
