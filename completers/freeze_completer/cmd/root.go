@@ -49,8 +49,15 @@ func init() {
 	rootCmd.Flags().Bool("window", false, "Display window controls")
 
 	carapace.Gen(rootCmd).FlagCompletion(carapace.ActionMap{
-		"background":  color.ActionHexColors(),
-		"config":      carapace.ActionFiles(),
+		"background": color.ActionHexColors(),
+		"config": carapace.Batch(
+			carapace.ActionFiles(),
+			carapace.ActionValuesDescribed(
+				"base", "Simple screenshot of code",
+				"full", "macOS-like screenshot",
+				"user", "Uses ~/.config/freeze/user.json",
+			).Tag("default configurations"),
+		).ToA(),
 		"execute":     bridge.ActionCarapaceBin().Split(),
 		"font.family": os.ActionFontFamilies(),
 		"font.file":   carapace.ActionFiles(),
