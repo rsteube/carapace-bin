@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html lang="en" class="latte" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bridge - carapace-bin</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="A multi-shell multi-command completion binary. Supports Bash, Elvish, Fish, Nushell, Oil, Powershell, Xonsh and Zsh.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../asciinema/asciinema-player.css">
+        <link rel="stylesheet" href=".././theme/catppuccin.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "mocha" : "latte";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('latte')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../carapace-bin.html"><strong aria-hidden="true">1.</strong> carapace-bin</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item "><a href="../setup.html"><strong aria-hidden="true">1.2.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../setup/environment.html"><strong aria-hidden="true">1.2.1.</strong> Environment</a></li></ol></li><li class="chapter-item "><a href="../completers.html"><strong aria-hidden="true">1.3.</strong> Completers</a></li><li class="chapter-item "><a href="../style.html"><strong aria-hidden="true">1.4.</strong> Style</a></li><li class="chapter-item "><a href="../bridges.html"><strong aria-hidden="true">1.5.</strong> Bridges</a></li><li class="chapter-item expanded "><a href="../spec.html"><strong aria-hidden="true">1.6.</strong> Spec</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../spec/user.html"><strong aria-hidden="true">1.6.1.</strong> User</a></li><li class="chapter-item expanded "><a href="../spec/bridge.html" class="active"><strong aria-hidden="true">1.6.2.</strong> Bridge</a></li><li class="chapter-item "><a href="../spec/embed.html"><strong aria-hidden="true">1.6.3.</strong> Embed</a></li><li class="chapter-item "><a href="../spec/run.html"><strong aria-hidden="true">1.6.4.</strong> Run</a></li><li class="chapter-item "><a href="../spec/shim.html"><strong aria-hidden="true">1.6.5.</strong> Shim</a></li><li class="chapter-item "><a href="../spec/scrape.html"><strong aria-hidden="true">1.6.6.</strong> Scrape</a></li><li class="chapter-item "><a href="../spec/codegen.html"><strong aria-hidden="true">1.6.7.</strong> Codegen</a></li><li class="chapter-item "><a href="../spec/examples.html"><strong aria-hidden="true">1.6.8.</strong> Examples</a></li><li class="chapter-item "><a href="../spec/macros.html"><strong aria-hidden="true">1.6.9.</strong> Macros</a></li></ol></li><li class="chapter-item "><a href="../overlay.html"><strong aria-hidden="true">1.7.</strong> Overlay</a></li><li class="chapter-item "><a href="../variable.html"><strong aria-hidden="true">1.8.</strong> Variable</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../variable/conditions.html"><strong aria-hidden="true">1.8.1.</strong> Conditions</a></li></ol></li><li class="chapter-item "><a href="../development.html"><strong aria-hidden="true">1.9.</strong> Development</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../development/projectLayout.html"><strong aria-hidden="true">1.9.1.</strong> Project Layout</a></li><li class="chapter-item "><a href="../development/build.html"><strong aria-hidden="true">1.9.2.</strong> Build</a></li><li class="chapter-item "><a href="../development/docker.html"><strong aria-hidden="true">1.9.3.</strong> Docker</a></li><li class="chapter-item "><a href="../development/creatingCompleters.html"><strong aria-hidden="true">1.9.4.</strong> Creating Completers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../development/creatingCompleters/manually.html"><strong aria-hidden="true">1.9.4.1.</strong> Manually</a></li><li class="chapter-item "><a href="../development/creatingCompleters/parsing.html"><strong aria-hidden="true">1.9.4.2.</strong> Parsing</a></li><li class="chapter-item "><a href="../development/creatingCompleters/scraping.html"><strong aria-hidden="true">1.9.4.3.</strong> Scraping</a></li><li class="chapter-item "><a href="../development/creatingCompleters/examples.html"><strong aria-hidden="true">1.9.4.4.</strong> Examples</a></li></ol></li><li class="chapter-item "><a href="../development/updatingCompleters.html"><strong aria-hidden="true">1.9.5.</strong> Updating Completers</a></li><li class="chapter-item "><a href="../development/bestPractices.html"><strong aria-hidden="true">1.9.6.</strong> Best Practices</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../development/bestPractices/coupledActions.html"><strong aria-hidden="true">1.9.6.1.</strong> Coupled Actions</a></li></ol></li><li class="chapter-item "><a href="../development/tools.html"><strong aria-hidden="true">1.9.7.</strong> Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../development/tools/carapace-fmt.html"><strong aria-hidden="true">1.9.7.1.</strong> carapace-fmt</a></li><li class="chapter-item "><a href="../development/tools/carapace-lint.html"><strong aria-hidden="true">1.9.7.2.</strong> carapace-lint</a></li><li class="chapter-item "><a href="../development/tools/carapace-parse.html"><strong aria-hidden="true">1.9.7.3.</strong> carapace-parse</a></li><li class="chapter-item "><a href="../development/tools/carapace-generate.html"><strong aria-hidden="true">1.9.7.4.</strong> carapace-generate</a></li></ol></li></ol></li><li class="chapter-item "><a href="../release_notes.html"><strong aria-hidden="true">1.10.</strong> Release Notes</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../release_notes/v1.0.html"><strong aria-hidden="true">1.10.1.</strong> v1.0</a></li><li class="chapter-item "><a href="../release_notes/v0.30.html"><strong aria-hidden="true">1.10.2.</strong> v0.30</a></li><li class="chapter-item "><a href="../release_notes/v0.29.html"><strong aria-hidden="true">1.10.3.</strong> v0.29</a></li><li class="chapter-item "><a href="../release_notes/v0.28.html"><strong aria-hidden="true">1.10.4.</strong> v0.28</a></li><li class="chapter-item "><a href="../release_notes/v0.27.html"><strong aria-hidden="true">1.10.5.</strong> v0.27</a></li><li class="chapter-item "><a href="../release_notes/v0.26.html"><strong aria-hidden="true">1.10.6.</strong> v0.26</a></li><li class="chapter-item "><a href="../release_notes/v0.25.html"><strong aria-hidden="true">1.10.7.</strong> v0.25</a></li><li class="chapter-item "><a href="../release_notes/v0.24.html"><strong aria-hidden="true">1.10.8.</strong> v0.24</a></li><li class="chapter-item "><a href="../release_notes/v0.23.html"><strong aria-hidden="true">1.10.9.</strong> v0.23</a></li><li class="chapter-item "><a href="../release_notes/v0.22.html"><strong aria-hidden="true">1.10.10.</strong> v0.22</a></li><li class="chapter-item "><a href="../release_notes/v0.21.html"><strong aria-hidden="true">1.10.11.</strong> v0.21</a></li><li class="chapter-item "><a href="../release_notes/v0.20.html"><strong aria-hidden="true">1.10.12.</strong> v0.20</a></li><li class="chapter-item "><a href="../release_notes/v0.19.html"><strong aria-hidden="true">1.10.13.</strong> v0.19</a></li><li class="chapter-item "><a href="../release_notes/v0.18.html"><strong aria-hidden="true">1.10.14.</strong> v0.18</a></li><li class="chapter-item "><a href="../release_notes/v0.17.html"><strong aria-hidden="true">1.10.15.</strong> v0.17</a></li><li class="chapter-item "><a href="../release_notes/v0.16.html"><strong aria-hidden="true">1.10.16.</strong> v0.16</a></li><li class="chapter-item "><a href="../release_notes/v0.15.html"><strong aria-hidden="true">1.10.17.</strong> v0.15</a></li><li class="chapter-item "><a href="../release_notes/v0.14.html"><strong aria-hidden="true">1.10.18.</strong> v0.14</a></li><li class="chapter-item "><a href="../release_notes/v0.13.html"><strong aria-hidden="true">1.10.19.</strong> v0.13</a></li><li class="chapter-item "><a href="../release_notes/v0.12.html"><strong aria-hidden="true">1.10.20.</strong> v0.12</a></li><li class="chapter-item "><a href="../release_notes/v0.11.html"><strong aria-hidden="true">1.10.21.</strong> v0.11</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="latte">Latte</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="frappe">Frappé</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="macchiato">Macchiato</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mocha">Mocha</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">carapace-bin</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/carapace-sh/carapace-bin" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/carapace-sh/carapace-bin/edit/master/docs/src/spec/bridge.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bridge"><a class="header" href="#bridge">Bridge</a></h1>
+<p>Bridging completions from another engine for shells not natively supported by it is possible with the corresponding <a href="./macros.html">Macro</a>.</p>
+<blockquote>
+<p>Even when the command supports your current shell it is still beneficial to bridge it as this enables <a href="./embed.html">embedding</a> like <code>sudo [spec.name] &lt;TAB&gt;</code>.</p>
+<p>It also avoids the issue of <a href="https://jzelinskie.com/posts/dont-recommend-sourcing-shell-completion/">shell startup delay</a> when sourcing the completion in init scripts otherwise circumvented with <a href="https://github.com/rsteube/lazycomplete">lazycomplete</a>.</p>
+<p>However, bridging is limited to supported commands/frameworks and how well it actually works.</p>
+</blockquote>
+<h2 id="frameworks"><a class="header" href="#frameworks">Frameworks</a></h2>
+<h3 id="argcomplete"><a class="header" href="#argcomplete">Argcomplete</a></h3>
+<p><a href="https://github.com/kislyuk/argcomplete">kislyuk/argcomplete</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionArgcomplete"><code>bridge.Argcomplete</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: az
+description: Azure Command-Line Interface
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Argcomplete([az])"]
+</code></pre>
+<h3 id="carapace"><a class="header" href="#carapace">Carapace</a></h3>
+<p><a href="https://github.com/carapace-sh/carapace">carapace-sh/carapace</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionCarapace"><code>bridge.Carapace</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: freckles
+description: simple dotfile manager
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Carapace([freckles])"]
+</code></pre>
+<h3 id="carapacebin"><a class="header" href="#carapacebin">CarapaceBin</a></h3>
+<p><a href="../completers.html">Completers</a> and <a href="../spec.html">Specs</a> registered in <a href="https://github.com/carapace-sh/carapace-bin">carapace-sh/carapace-bin</a> can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionCarapaceBin"><code>bridge.CarapaceBin</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: github-cli
+description: Work seamlessly with GitHub from the command line
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.CarapaceBin([gh])"]
+</code></pre>
+<h3 id="clap"><a class="header" href="#clap">Clap</a></h3>
+<p><a href="https://github.com/clap-rs/clap">clap-rs/clap</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionClap"><code>bridge.Clap</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: dyamic
+description: clap dynamic example
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Clap([dynamic])"]
+</code></pre>
+<h3 id="click"><a class="header" href="#click">Click</a></h3>
+<p><a href="https://github.com/pallets/click">pallets/click</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionClick"><code>bridge.Click</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: watson
+description: Watson is a tool aimed at helping you monitoring your time
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Click([watson])"]
+</code></pre>
+<h3 id="cobra"><a class="header" href="#cobra">Cobra</a></h3>
+<p><a href="https://github.com/spf13/cobra">spf13/cobra</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionCobra"><code>bridge.Cobra</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: kubectl
+description: kubectl controls the Kubernetes cluster manager
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Cobra([kubectl])"]
+</code></pre>
+<h3 id="complete"><a class="header" href="#complete">Complete</a></h3>
+<p><a href="https://github.com/posener/complete">posener/complete</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionComplete"><code>bridge.Complete</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: vault
+description: Manage Secrets &amp; Protect Sensitive Data
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Complete([vault])"]
+</code></pre>
+<h3 id="inshellisense"><a class="header" href="#inshellisense">Inshellisense</a></h3>
+<p>Commands provided by <a href="https://github.com/microsoft/inshellisense">microsoft/inshellisense</a> can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionInshellisense"><code>bridge.Inshellisense</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: node
+description: Run the node interpreter
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Inshellisense([node])"]
+</code></pre>
+<h3 id="kingpin"><a class="header" href="#kingpin">Kingpin</a></h3>
+<p><a href="https://github.com/alecthomas/kingpin">alecthomas/kingpin</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionKingpin"><code>bridge.Kingpin</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: tsh
+description: Teleport Command Line Client
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Kingpin([tsh])"]
+</code></pre>
+<h3 id="urfavecli"><a class="header" href="#urfavecli">Urfavecli</a></h3>
+<p><a href="https://github.com/urfave/cli">urfave/cli</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionUrfavecli"><code>bridge.Urfavecli</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: tea
+description: command line tool to interact with Gitea
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Urfavecli([tea])"]
+</code></pre>
+<h3 id="yargs"><a class="header" href="#yargs">Yargs</a></h3>
+<p><a href="https://github.com/yargs/yargs">yargs/yargs</a> based commands can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionYargs"><code>bridge.Yargs</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: ng
+description: CLI tool for Angular
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Yargs([ng])"]
+</code></pre>
+<h2 id="shells"><a class="header" href="#shells">Shells</a></h2>
+<blockquote>
+<p>For shells custom configurations are loaded from <a href="https://pkg.go.dev/os#UserConfigDir"><code>${UserConfigDir}/carapace/bridge</code></a>.
+Invoking completion in shells is quite tricky though and edge cases are likely to fail.</p>
+</blockquote>
+<h3 id="bash"><a class="header" href="#bash">Bash</a></h3>
+<p>Commands registered in <a href="https://www.gnu.org/software/bash/">bash</a> can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionBash"><code>bridge.Bash</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name:  tail
+description: output the last part of files
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Bash([tail])"]
+</code></pre>
+<h3 id="fish"><a class="header" href="#fish">Fish</a></h3>
+<p>Commands registered in <a href="https://github.com/fish-shell/fish-shell">fish-shell/fish-shell</a> can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionFish"><code>bridge.Fish</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name:  git
+description: the stupid content tracker
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Fish([git])"]
+</code></pre>
+<h3 id="powershell"><a class="header" href="#powershell">Powershell</a></h3>
+<p>Commands registered in <a href="https://microsoft.com/powershell">powershell</a> can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionPowershell"><code>bridge.Powershell</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name:  ConvertTo-Json
+description: convert to json
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Powershell([ConvertTo-Json])"]
+</code></pre>
+<h3 id="zsh"><a class="header" href="#zsh">Zsh</a></h3>
+<p>Commands registered in <a href="https://www.zsh.org/">zsh</a> can be bridged with the <a href="https://pkg.go.dev/github.com/carapace-sh/carapace-bridge/pkg/actions/bridge#ActionZsh"><code>bridge.Zsh</code></a> macro:</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name:  git
+description: the stupid content tracker
+parsing: disabled
+completion:
+  positionalany: ["$carapace.bridge.Zsh([git])"]
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../spec/user.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../spec/embed.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../spec/user.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../spec/embed.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../asciinema/asciinema-player.min.js"></script>
+        <script src="../asciinema/load.js"></script>
+
+
+    </div>
+    </body>
+</html>
